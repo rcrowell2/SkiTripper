@@ -3,8 +3,53 @@
     <head>
         <title>Ski Trip Explorer</title>
         <link rel="stylesheet" href="style.css">
-
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     </head>
     <body>
+        <h1>Ski Trip Planner</h1>
+        <div class="wrapper">
+            <div class="menu">
+                <select name="searchType" id="searchType" class="searchType" onchange="updateDisplay()">
+                    <option value="empty" id="" selected></option>
+                    <option value="all" id="allOpt">Show All Resorts</option>
+                    <option value="state" id="stateOpt">Select By State</option>
+                    <option value="pass" id="passOpt">Select By Pass</option>
+                    <option value="trip" id="tripOpt">Show / Create a Trip</option>
+                </select>
+            </div>
+        </div>
+        <div class="secondLevel">
+            <div id="all" class="hidden">
+                <p>showing all resorts...</p>
+            </div>
+            <div id="state" class="hidden">                
+                <div class="menu">
+                    <select name="stateMenu" id="searchType">
+                        <option value="state1">state1</option>
+                        <option value="state2">State2</option>
+                        <option value="state3">state3</option>
+                        <option value="state4">state4</option>
+                    </select>
+                </div>
+            </div>
+            <div id="pass" class="hidden">
+                <div class="menu">
+                    <select name="passMenu" id="searchType">
+                        <option value="pass1">ikon</option>
+                        <option value="pass2">epic</option>
+                        <option value="pass3">indy</option>
+                    </select>
+                </div>
+            </div>
+            <div id="trip" class="hidden">
+                <div class="menu">
+                    <select name="trip" id="searchType">
+                        <option value="trip1">existingtrip</option>
+                        <option value="noTrip">create a new Trip</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <script src="functions.js"></script>
     </body>
 </html>
