@@ -33,9 +33,7 @@
         <br>
         <div class="secondLevel">
             <div id="all" class="hidden">
-                <p>showing all resorts...</p>
-
-
+                
                 <?php
                 $servername = "localhost";
                 $username = "root";
@@ -53,12 +51,12 @@
                 $result = $conn->query($sql);
                 
                 if ($result->num_rows > 0) {
-                  echo "<table><tr><th>name</th><th>openRuns</th><th>openLifts</th></tr>";
+                  echo '<table><tr><th>name</th><th>openRuns</th><th>openLifts</th></tr>';
                   // output data of each row
                   while($row = $result->fetch_assoc()) {
-                    echo "<tr><td>".$row["name"]."</td><td>".$row["openRuns"]."</td><td>".$row["openLifts"]."</td></tr>";
+                    echo '<tr><td>'.$row['name'].'</td><td>'.$row['openRuns'].'</td><td>'.$row['openLifts'].'</td></tr>';
                   }
-                  echo "</table>";
+                  echo '</table>';
                 } else {
                   echo "0 results";
                 }
@@ -70,19 +68,64 @@
             <div id="state" class="hidden">                
                 <div class="menu">
                     <select name="stateMenu" id="searchType">
-                        <option value="state1">state1</option>
-                        <option value="state2">State2</option>
-                        <option value="state3">state3</option>
-                        <option value="state4">state4</option>
+                        <?php
+                          $servername = "localhost";
+                          $username = "root";
+                          $password = "root";
+                          $dbname = "skitrip";
+                          
+                          // Create connection
+                          $conn = new mysqli($servername, $username, $password, $dbname);
+                          // Check connection
+                          if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                          }
+                          
+                          $sql = "SELECT distinct(state) FROM resortInfo";
+                          $result = $conn->query($sql);
+                          
+                          if ($result->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result->fetch_assoc()) {
+                              echo "<option value=".$row["state"].">".$row["state"]."</option>";
+                            }
+                          } else {
+                            echo "0 results";
+                          }
+                          $conn->close();      
+                        ?>
                     </select>
                 </div>
             </div>
             <div id="pass" class="hidden">
                 <div class="menu">
                     <select name="passMenu" id="searchType">
-                        <option value="pass1">ikon</option>
-                        <option value="pass2">epic</option>
-                        <option value="pass3">indy</option>
+                    <?php
+                          $servername = "localhost";
+                          $username = "root";
+                          $password = "root";
+                          $dbname = "skitrip";
+                          
+                          // Create connection
+                          $conn = new mysqli($servername, $username, $password, $dbname);
+                          // Check connection
+                          if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                          }
+                          
+                          $sql = "SELECT distinct(passName) FROM pass";
+                          $result = $conn->query($sql);
+                          
+                          if ($result->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result->fetch_assoc()) {
+                              echo "<option value=".$row["passName"].">".$row["passName"]."</option>";
+                            }
+                          } else {
+                            echo "0 results";
+                          }
+                          $conn->close();      
+                        ?>
                     </select>
                 </div>
             </div>
