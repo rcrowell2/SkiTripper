@@ -2,8 +2,8 @@ function updateDisplay() {
 		var responseID = $('.searchType').val()
         console.log(responseID)
 		if(responseID == "all"){
-			$('#secondLevel').removeClass("hidden");
-			$('#secondLevel').addClass("show");
+			$('#all').removeClass("hidden");
+			$('#all').addClass("show");
             $('#state').removeClass("show");
 			$('#pass').removeClass("show");
 			$('#trip').removeClass("show");
@@ -37,6 +37,15 @@ function updateDisplay() {
             $('#all').addClass("hidden");
 			$('#pass').addClass("hidden");
 			$('#state').addClass("hidden");
-		}
+		} else {
+            $('#all').removeClass("show");
+			$('#pass').removeClass("show");
+			$('#state').removeClass("show");
+            $('#all').addClass("hidden");
+			$('#pass').addClass("hidden");
+			$('#state').addClass("hidden");
+            $('#trip').removeClass("show");
+			$('#trip').addClass("hidden");
+        }
 }
 
