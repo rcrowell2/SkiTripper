@@ -34,9 +34,38 @@
         <div class="secondLevel">
             <div id="all" class="hidden">
                 <p>showing all resorts...</p>
+
+
                 <?php
-                    
+                $servername = "localhost";
+                $username = "root";
+                $password = "root";
+                $dbname = "skitrip";
+                
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                // Check connection
+                if ($conn->connect_error) {
+                  die("Connection failed: " . $conn->connect_error);
+                }
+                
+                $sql = "SELECT name, openRuns, openLifts FROM resortInfo";
+                $result = $conn->query($sql);
+                
+                if ($result->num_rows > 0) {
+                  echo "<table><tr><th>name</th><th>openRuns</th><th>openLifts</th></tr>";
+                  // output data of each row
+                  while($row = $result->fetch_assoc()) {
+                    echo "<tr><td>".$row["name"]."</td><td>".$row["openRuns"]."</td><td>".$row["openLifts"]."</td></tr>";
+                  }
+                  echo "</table>";
+                } else {
+                  echo "0 results";
+                }
+                $conn->close();    
                 ?>
+
+
             </div>
             <div id="state" class="hidden">                
                 <div class="menu">

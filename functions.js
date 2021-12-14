@@ -48,4 +48,3 @@ function updateDisplay() {
 			$('#trip').addClass("hidden");
         }
 }
-
