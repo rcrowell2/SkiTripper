@@ -18,11 +18,11 @@
         <nav>
 		<ul>
 			<li><a href ="resort.php" class="navli">Edit/Add Resort</a></li>
-			<li><a href ="index.php"><h1>Ski Trip Explorer</h1></a> </li>
+			<li><a href ="index.php" class="navli"><h1>Ski Trip Explorer</h1></a> </li>
 			<li ><a href ="trip.php" class="navli">Edit Trip</a> </li>
 		</ul>
 	</nav>
-        
+        <div class="content">
         <div class="wrapper">
             <div class="menu">
                 <select name="searchType" id="searchType" class="searchType" onchange="updateDisplay()">
@@ -248,6 +248,6 @@
         ?>
         
         <script src="functions.js"></script>
-    
+        </div>
     </body>
 </html>

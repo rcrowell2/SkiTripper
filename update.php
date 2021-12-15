@@ -22,7 +22,7 @@
 			<li ><a href ="trip.php" class="navli">Edit Trip</a> </li>
 		</ul>
 	</nav>
-
+<div class="content">
     <?php
         error_reporting(E_ALL);
 
@@ -87,7 +87,7 @@
         }
 
     ?>
-
+</div>
     </body>
 </html>
 

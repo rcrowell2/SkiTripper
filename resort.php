@@ -22,7 +22,7 @@
 			<li ><a href ="trip.php" class="navli">Edit Trip</a> </li>
 		</ul>
 	</nav>
-
+<div class="content">
     <div class="update">
             <form action="update.php" method="post">
             <label for="name">Resort Name:</label><br>
@@ -40,6 +40,6 @@
             <input type="submit" value="Submit">
         </form >
     </div>
-       
+    </div>
     </body>
 </html>
