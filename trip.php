@@ -23,20 +23,19 @@
 		</ul>
 	</nav>
 
+    <div class="update">
+        <form action="updateTrip.php" method="post">
+            <label for="name">Trip Name:</label><br>
+            <input type="text" id='name' name="name"><br><br>
+            <label for="days">Length in Days:</label><br>
+            <input type="text" id='days' name="days"><br><br>
+            <label for="resort">Resort Name:</label><br>
+            <input type="text" id='resort' name="resort"><br><br>
+            <button type="submit" value="Submit">Submit</button>
+            <button type="submit" value="Delete">Delete</button>
 
-    <form action="updateTrip.php" method="post">
-        <label for="name">Resort Name</label><br>
-        <input type="text" id='name' name="name"><br>
-        <label for="numRuns">Total Runs</label><br>
-        <input type="text" id='numRuns' name="numRuns"><br>
-        <label for="openRuns">Open Runs</label><br>
-        <input type="text" id='openRuns' name="openRuns"><br>
-        <label for="numLifts">Total Lifts</label><br>
-        <input type="text" id='numLifts' name="numLifts"><br>
-        <label for="openLifts">Open Lifts</label><br>
-        <input type="text" id='openLifts' name="openLifts"><br>
-        <input type="submit" value="Submit">
-    </form >
+        </form > 
+    </div>
        
     </body>
 </html>

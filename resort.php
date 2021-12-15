@@ -23,20 +23,23 @@
 		</ul>
 	</nav>
 
-
-    <form action="update.php" method="post">
-        <label for="name">Resort Name</label><br>
-        <input type="text" id='name' name="name"><br>
-        <label for="numRuns">Total Runs</label><br>
-        <input type="text" id='numRuns' name="numRuns"><br>
-        <label for="openRuns">Open Runs</label><br>
-        <input type="text" id='openRuns' name="openRuns"><br>
-        <label for="numLifts">Total Lifts</label><br>
-        <input type="text" id='numLifts' name="numLifts"><br>
-        <label for="openLifts">Open Lifts</label><br>
-        <input type="text" id='openLifts' name="openLifts"><br>
-        <input type="submit" value="Submit">
-    </form >
+    <div class="update">
+            <form action="update.php" method="post">
+            <label for="name">Resort Name:</label><br>
+            <input type="text" id='name' name="name"><br><br>
+            <label for="numRuns">Total Runs:</label><br>
+            <input type="text" id='numRuns' name="numRuns"><br><br>
+            <label for="openRuns">Open Runs:</label><br>
+            <input type="text" id='openRuns' name="openRuns"><br><br>
+            <label for="numLifts">Total Lifts:</label><br>
+            <input type="text" id='numLifts' name="numLifts"><br><br>
+            <label for="openLifts">Open Lifts:</label><br>
+            <input type="text" id='openLifts' name="openLifts"><br><br>
+            <label for="state">State:</label><br>
+            <input type="text" id='state' name="state"><br><br>
+            <input type="submit" value="Submit">
+        </form >
+    </div>
        
     </body>
 </html>

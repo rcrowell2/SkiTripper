@@ -64,7 +64,21 @@ select {
     text-align: center;
     width: 40%;
 }
-
+.update {
+  margin:0 auto; 
+  width: 40%; 
+  padding:20px;
+  background: lightGray;
+  border:2px solid #333;  
+}
+form {
+  padding: 20px;
+  text-align: left;
+}
+form, input {
+  width: 95%;
+  padding: 5px;
+}
 /* snowflake animation found from https://freefrontend.com/css-snow-effects/ */
 html, body {
     width: 100vw;

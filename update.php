@@ -37,12 +37,13 @@
             $conn = new mysqli($servername, $username, $password, $dbname);
             // Check connection
             if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+                die("Connection failed: " . $conn->connect_error);
             }
             $numRuns = $_POST["numRuns"];
             $openRuns = $_POST["openRuns"];
             $numLifts = $_POST["numLifts"];
             $openLifts = $_POST["openLifts"];
+            $state = $_POST["state"];
             $name = $_POST["name"];
 
 
@@ -51,23 +52,30 @@
             $result = $conn->query($sql);
             $row = $result->fetch_row();
             $cnt = $row[0];
-            echo "<h1>count:  '$cnt'</h1>";
 
 
             if ($cnt != 0) { 
 
-                $sql = "UPDATE resortInfo SET numRuns='$numRuns', openRuns='$openRuns', numLifts='$numLifts', openLifts='$openLifts' WHERE name='$name'";
+                $sql = "UPDATE resortInfo SET numRuns='$numRuns', openRuns='$openRuns', numLifts='$numLifts', openLifts='$openLifts', state='$state' WHERE name='$name'";
 
                 if ($conn->query($sql) === TRUE) {
-                    echo "<p> that shit worked'$numRuns'</p>";
+                    echo "<h1>Resort: '$name' succesfully updated.</h1>";
                 } else {
                     echo "Error updating record: " . $conn->error;
                 }
             } else {
-                $sql = "INSERT INTO resortInfo(name, numRuns, openRuns, numLifts, openLifts) VALUES (\"'$name'\", '$numRuns','$openRuns', '$numLifts', '$openLifts') ";
+
+                # need to find out max resort_id and increment that by 1
+                $sql = "SELECT max(resortID) from resortInfo";
+                $result = $conn->query($sql);
+                $row = $result->fetch_row();
+                $max = $row[0];
+                $max = $max + 1;
+
+                $sql = "INSERT INTO resortInfo(name, numRuns, openRuns, numLifts, openLifts, state, resortId) VALUES ('$name', '$numRuns','$openRuns', '$numLifts', '$openLifts', '$state', '$max') ";
 
                 if ($conn->query($sql) === TRUE) {
-                    echo "<p> that shit worked'$numRuns'</p>";
+                    echo "<h1>Resort: '$name' succesfully created.</h1>";
                 } else {
                     echo "Error updating record: " . $conn->error;
                 }
@@ -75,7 +83,7 @@
 
             $conn->close();
         } else {
-            echo "<p>there is nothing going on here :(</p>";
+            echo "<h1>There was an error try agian.</h1>";
         }
 
     ?>
