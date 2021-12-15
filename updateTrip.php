@@ -39,15 +39,13 @@
             if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
             }
-            $numRuns = $_POST["numRuns"];
-            $openRuns = $_POST["openRuns"];
-            $numLifts = $_POST["numLifts"];
-            $openLifts = $_POST["openLifts"];
+            $days = $_POST["days"];
+            $resort = $_POST["resort"];
             $name = $_POST["name"];
 
 
             #add if resort exists logic ?
-            $sql = "SELECT count(*) cnt from resortInfo WHERE name='$name'";
+            $sql = "SELECT count(*) cnt from trip WHERE name='$name'";
             $result = $conn->query($sql);
             $row = $result->fetch_row();
             $cnt = $row[0];
@@ -56,15 +54,15 @@
 
             if ($cnt != 0) { 
 
-                $sql = "UPDATE resortInfo SET numRuns='$numRuns', openRuns='$openRuns', numLifts='$numLifts', openLifts='$openLifts' WHERE name='$name'";
+                $sql = "UPDATE trip SET days='$days', resort_id='$resort_id' WHERE name='$name'";
 
                 if ($conn->query($sql) === TRUE) {
-                    echo "<p> that shit worked'$numRuns'</p>";
+                    echo "<p> that shit worked'$name' update</p>";
                 } else {
                     echo "Error updating record: " . $conn->error;
                 }
             } else {
-                $sql = "INSERT INTO resortInfo(name, numRuns, openRuns, numLifts, openLifts) VALUES (\"'$name'\", '$numRuns','$openRuns', '$numLifts', '$openLifts') ";
+                $sql = "INSERT INTO trip(name, resort_id, days) VALUES (\"'$name'\", '$resort_id','$openRuns', '$numLifts', '$openLifts') ";
 
                 if ($conn->query($sql) === TRUE) {
                     echo "<p> that shit worked'$numRuns'</p>";
