@@ -30,7 +30,7 @@
                     <option value="all" id="allOpt">Show All Resorts</option>
                     <option value="state" id="stateOpt">Select By State</option>
                     <option value="pass" id="passOpt">Select By Pass</option>
-                    <option value="trip" id="tripOpt">Show / Create a Trip</option>
+                    <option value="trip" id="tripOpt">Show a Trip</option>
                 </select>
             </div>
         </div>
@@ -39,9 +39,6 @@
         <br>
         <div class="secondLevel">
             <div id="all" class="hidden">
-
-
-                
                 <?php
                 $servername = "localhost";
                 $username = "root";
@@ -70,12 +67,11 @@
                 }
                 $conn->close();    
                 ?>
-
-
             </div>
             <div id="state" class="hidden">                
                 <div class="menu">
-                    <select name="stateMenu" id="searchType">
+                    <form action="" method="post">
+                    <select name="stateMenu" id="searchType" onchange="this.form.submit()">
                         <?php
                           $servername = "localhost";
                           $username = "root";
@@ -103,11 +99,13 @@
                           $conn->close();      
                         ?>
                     </select>
+                    </form>
                 </div>
             </div>
             <div id="pass" class="hidden">
                 <div class="menu">
-                    <select name="passMenu" id="searchType">
+                    <form method="POST" action="">
+                    <select name="passMenu" id="searchType" onchange="this.form.submit()">
                     <?php
                           $servername = "localhost";
                           $username = "root";
@@ -135,17 +133,63 @@
                           $conn->close();      
                         ?>
                     </select>
+                    </form>
                 </div>
             </div>
             <div id="trip" class="hidden">
                 <div class="menu">
-                    <select name="trip" id="searchType">
-                        <option value="trip1">existingtrip</option>
-                        <option value="noTrip">create a new Trip</option>
+                    <form action="" method="post">
+                    <select name="tripMenu" id="searchType" onchange="this.form.submit()">
+                    <?php
+                          $servername = "localhost";
+                          $username = "root";
+                          $password = "root";
+                          $dbname = "skitrip";
+                          
+                          // Create connection
+                          $conn = new mysqli($servername, $username, $password, $dbname);
+                          // Check connection
+                          if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                          }
+                          
+                          $sql = "SELECT distinct(name) FROM trip";
+                          $result = $conn->query($sql);
+                          
+                          if ($result->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result->fetch_assoc()) {
+                              echo "<option value=".$row["name"].">".$row["name"]."</option>";
+                            }
+                          } else {
+                            echo "0 results";
+                          }
+                          $conn->close();      
+                        ?>
                     </select>
+                    </form>
                 </div>
             </div>
         </div>
+
+        <?php
+            if (isset($_POST["passMenu"])) {
+                $pass = $_POST["passMenu"];
+                echo "<h1>'$pass'</h1>";
+                unset($_POST);
+            } else if (isset($_POST["stateMenu"])) {
+                $pass = $_POST["stateMenu"];
+                echo "<h1>'$pass'</h1>";
+                unset($_POST);
+            } else if (isset($_POST["tripMenu"])) {
+                $pass = $_POST["tripMenu"];
+                echo "<h1>'$pass'</h1>";
+
+                unset($_POST);
+            }
+                          
+        
+        ?>
         
         <script src="functions.js"></script>
     
