@@ -15,7 +15,13 @@
                 console.log(div.className)
             }
         </script>
-        <nav><h1>Ski Trip Planner</h1></nav>
+        <nav>
+		<ul>
+			<li><a href ="resort.php" class="navli">Edit/Add Resort</a></li>
+			<li><a href ="index.php"><h1>Ski Trip Explorer</h1></a> </li>
+			<li ><a href ="trip.php" class="navli">Edit Trip</a> </li>
+		</ul>
+	</nav>
         
         <div class="wrapper">
             <div class="menu">
@@ -33,6 +39,8 @@
         <br>
         <div class="secondLevel">
             <div id="all" class="hidden">
+
+
                 
                 <?php
                 $servername = "localhost";
@@ -47,14 +55,14 @@
                   die("Connection failed: " . $conn->connect_error);
                 }
                 
-                $sql = "SELECT name, openRuns, openLifts FROM resortInfo";
+                $sql = "SELECT * FROM resortInfo";
                 $result = $conn->query($sql);
                 
                 if ($result->num_rows > 0) {
-                  echo '<table><tr><th>name</th><th>openRuns</th><th>openLifts</th></tr>';
+                  echo '<table><tr><th>Resort</th><th>State</th><th>Open Runs</th><th>Total Runs</th><th>Open Lifts</th><th>Total Lifts</th></tr>';
                   // output data of each row
                   while($row = $result->fetch_assoc()) {
-                    echo '<tr><td>'.$row['name'].'</td><td>'.$row['openRuns'].'</td><td>'.$row['openLifts'].'</td></tr>';
+                    echo '<tr><td>'.$row['name'].'</td><td>'.$row['state'].'</td><td>'.$row['openRuns'].'</td><td>'.$row['numRuns'].'</td><td>'.$row['openLifts'].'</td><td>'.$row['numLifts'].'</td></tr>';
                   }
                   echo '</table>';
                 } else {
