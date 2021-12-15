@@ -31,8 +31,8 @@
             <input type="text" id='days' name="days"><br><br>
             <label for="resort">Resort Name:</label><br>
             <input type="text" id='resort' name="resort"><br><br>
-            <button type="submit" value="Submit">Submit</button>
-            <button type="submit" value="Delete">Delete</button>
+            <button type="submit" name="Submit">Submit</button>
+            <button type="submit" name="Delete">Delete</button>
 
         </form > 
     </div>

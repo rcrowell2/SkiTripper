@@ -36,11 +36,9 @@
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-
-        if ( isset( $_POST['submit'] ) ) { 
-
-            
-            
+        
+        if ( isset( $_POST['Submit'] ) ) { 
+    
             $days = $_POST["days"];
             $resort = $_POST["resort"];
             $name = $_POST["name"];

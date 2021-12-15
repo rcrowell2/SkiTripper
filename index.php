@@ -72,6 +72,7 @@
                 <div class="menu">
                     <form action="" method="post">
                     <select name="stateMenu" id="searchType" onchange="this.form.submit()">
+                        <option value="empty" selected></option>
                         <?php
                           $servername = "localhost";
                           $username = "root";
@@ -106,6 +107,7 @@
                 <div class="menu">
                     <form method="POST" action="">
                     <select name="passMenu" id="searchType" onchange="this.form.submit()">
+                    <option value="blank" selected></option>
                     <?php
                           $servername = "localhost";
                           $username = "root";
@@ -119,13 +121,13 @@
                             die("Connection failed: " . $conn->connect_error);
                           }
                           
-                          $sql = "SELECT distinct(passName) FROM pass";
+                          $sql = "SELECT distinct(passName), passID FROM pass";
                           $result = $conn->query($sql);
                           
                           if ($result->num_rows > 0) {
                             // output data of each row
                             while($row = $result->fetch_assoc()) {
-                              echo "<option value=".$row["passName"].">".$row["passName"]."</option>";
+                              echo "<option value=".$row["passID"].">".$row["passName"]."</option>";
                             }
                           } else {
                             echo "0 results";
@@ -140,6 +142,7 @@
                 <div class="menu">
                     <form action="" method="post">
                     <select name="tripMenu" id="searchType" onchange="this.form.submit()">
+                    <option value="blank" selected></option>
                     <?php
                           $servername = "localhost";
                           $username = "root";
@@ -153,13 +156,13 @@
                             die("Connection failed: " . $conn->connect_error);
                           }
                           
-                          $sql = "SELECT distinct(name) FROM trip";
+                          $sql = "SELECT distinct(name), trip_id FROM trip";
                           $result = $conn->query($sql);
                           
                           if ($result->num_rows > 0) {
                             // output data of each row
                             while($row = $result->fetch_assoc()) {
-                              echo "<option value=".$row["name"].">".$row["name"]."</option>";
+                              echo "<option value=".$row["trip_id"].">".$row["name"]."</option>";
                             }
                           } else {
                             echo "0 results";
@@ -173,22 +176,75 @@
         </div>
 
         <?php
+
+            $servername = "localhost";
+            $username = "root";
+            $password = "root";
+            $dbname = "skitrip";
+                
+            // Create connection
+            $conn = new mysqli($servername, $username, $password, $dbname);
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+                
             if (isset($_POST["passMenu"])) {
                 $pass = $_POST["passMenu"];
-                echo "<h1>'$pass'</h1>";
+                $sql = "SELECT * FROM resort NATURAL JOIN resortInfo where pass_id='$pass'";
+                $result = $conn->query($sql);
+                
+                if ($result->num_rows > 0) {
+                  echo '<table><tr><th>Resort</th><th>State</th><th>Open Runs</th><th>Total Runs</th><th>Open Lifts</th><th>Total Lifts</th></tr>';
+                  // output data of each row
+                  while($row = $result->fetch_assoc()) {
+                    echo '<tr><td>'.$row['name'].'</td><td>'.$row['state'].'</td><td>'.$row['openRuns'].'</td><td>'.$row['numRuns'].'</td><td>'.$row['openLifts'].'</td><td>'.$row['numLifts'].'</td></tr>';
+                  }
+                  echo '</table>';
+                } else {
+                  echo "0 results";
+                }
                 unset($_POST);
             } else if (isset($_POST["stateMenu"])) {
-                $pass = $_POST["stateMenu"];
-                echo "<h1>'$pass'</h1>";
+                $state = $_POST["stateMenu"];
+
+                $sql = "SELECT * FROM resortInfo where state='$state'";
+                $result = $conn->query($sql);
+                
+                if ($result->num_rows > 0) {
+                  echo '<table><tr><th>Resort</th><th>State</th><th>Open Runs</th><th>Total Runs</th><th>Open Lifts</th><th>Total Lifts</th></tr>';
+                  // output data of each row
+                  while($row = $result->fetch_assoc()) {
+                    echo '<tr><td>'.$row['name'].'</td><td>'.$row['state'].'</td><td>'.$row['openRuns'].'</td><td>'.$row['numRuns'].'</td><td>'.$row['openLifts'].'</td><td>'.$row['numLifts'].'</td></tr>';
+                  }
+                  echo '</table>';
+                } else {
+                  echo "0 results";
+                }
                 unset($_POST);
             } else if (isset($_POST["tripMenu"])) {
-                $pass = $_POST["tripMenu"];
-                echo "<h1>'$pass'</h1>";
+                $trip = $_POST["tripMenu"];
+                $sql = "SELECT * FROM trip join resortInfo on trip.resort_id = resortInfo.resortID where trip_id = '$trip'";
+                $result = $conn->query($sql);
+                
+                if ($result->num_rows > 0) {
+                echo "<h1>Trip Resort Info:</h1>";
+
+                  echo '<table><tr><th>Resort</th><th>State</th><th>Open Runs</th><th>Total Runs</th><th>Open Lifts</th><th>Total Lifts</th></tr>';
+                  // output data of each row
+                  while($row = $result->fetch_assoc()) {
+                    echo '<tr><td>'.$row['name'].'</td><td>'.$row['state'].'</td><td>'.$row['openRuns'].'</td><td>'.$row['numRuns'].'</td><td>'.$row['openLifts'].'</td><td>'.$row['numLifts'].'</td></tr>';
+                  }
+                  echo '</table>';
+                } else {
+                  echo "0 results";
+                }
 
                 unset($_POST);
             }
-                          
-        
+            unset($_POST);                            
+            $conn->close();   
+
         ?>
         
         <script src="functions.js"></script>
